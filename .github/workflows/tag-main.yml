@@ -1,12 +1,12 @@
 name: Tag main branch
 on:
   push:
-    # branches:
-    #   - main
-    # paths:
-    #   - 'pyproject.toml'
     branches:
+      - main
       - feat-add-prev-tag-check-debug
+    paths:
+      - 'pyproject.toml'
+      
 
 jobs:
   tag-main:
