@@ -6,6 +6,8 @@ on:
       - feat-add-prev-tag-check-debug
     paths:
       - 'pyproject.toml'
+  # manual run
+  workflow_dispatch:
       
 
 jobs:
