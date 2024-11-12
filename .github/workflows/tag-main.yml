@@ -1,10 +1,12 @@
 name: Tag main branch
 on:
   push:
+    # branches:
+    #   - main
+    # paths:
+    #   - 'pyproject.toml'
     branches:
-      - main
-    paths:
-      - 'pyproject.toml'
+      - feat-add-prev-tag-check-debug
 
 jobs:
   tag-main:
@@ -26,6 +28,9 @@ jobs:
           # Get the version from the previous commit for comparison
           PREV_TAG=$(git show HEAD~1:pyproject.toml | grep -E '^version = ".*"' | cut -d'"' -f2)
           echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Check if version changed
         id: version_check
