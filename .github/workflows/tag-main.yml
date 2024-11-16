@@ -12,6 +12,10 @@ on:
 
 jobs:
   tag-main:
+    permissions:
+      contents: write
+      pull-requests: write
+      
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -33,8 +37,8 @@ jobs:
           PREV_TAG=$(git show HEAD~1:pyproject.toml | grep -E '^version = ".*"' | cut -d'"' -f2)
           echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: Check if version changed
         id: version_check
