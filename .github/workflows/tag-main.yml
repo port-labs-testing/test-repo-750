@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - 'pyproject.toml'
+
   # manual run
   workflow_dispatch:
       
