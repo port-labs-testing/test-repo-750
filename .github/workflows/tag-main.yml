@@ -36,19 +36,22 @@ jobs:
           PREV_TAG=$(git show HEAD~1:pyproject.toml | grep -E '^version = ".*"' | cut -d'"' -f2)
           echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
 
-      - name: Check if version changed
-        id: version_check
+      # - name: Check if version changed
+      #   id: version_check
+      #   run: |
+      #     if [ "$CURRENT_TAG" == "$PREV_TAG" ]; then
+      #       echo "Version has not changed. Skipping tagging."
+      #       exit 0
+      #     fi
+
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
+
+      - name: Tag main
         run: |
           if [ "$CURRENT_TAG" == "$PREV_TAG" ]; then
             echo "Version has not changed. Skipping tagging."
             exit 0
           fi
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
-      - name: Tag main
-        if: steps.version_check.outcome == 'success'
-        run: |
           git tag "v${CURRENT_TAG}"
           git push origin main --tags
