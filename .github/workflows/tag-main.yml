@@ -48,9 +48,9 @@ jobs:
 
       - name: Tag main
         run: |
-          if [ "$CURRENT_TAG" == "$PREV_TAG" ]; then
+          if [ "$current_tag" == "$prev_tag" ]; then
             echo "Version has not changed. Skipping tagging."
             exit 0
           fi
-          git tag "v${CURRENT_TAG}"
+          git tag "v${current_tag}"
           git push origin main --tags
