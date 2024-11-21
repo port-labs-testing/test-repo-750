@@ -15,6 +15,10 @@ jobs:
       contents: write
 
     runs-on: ubuntu-latest
+    outputs:
+      current_tag: ${{ steps.set_outputs.outputs.current_tag }}
+      prev_tag: ${{ steps.set_outputs.outputs.prev_tag }}
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -27,6 +31,7 @@ jobs:
           # Get the current version from pyproject.toml
           CURRENT_TAG=$(grep -E '^version = ".*"' pyproject.toml | cut -d'"' -f2)
           echo "current_tag=${CURRENT_TAG}" >> $GITHUB_ENV
+          echo "::set-output name=current_tag::${CURRENT_TAG}"
 
       - name: Get previous version
         id: get_previous_version
@@ -34,6 +39,7 @@ jobs:
           # Get the version from the previous commit for comparison
           PREV_TAG=$(git show HEAD~1:pyproject.toml | grep -E '^version = ".*"' | cut -d'"' -f2)
           echo "prev_tag=${PREV_TAG}" >> $GITHUB_ENV
+          echo "::set-output name=prev_tag::${PREV_TAG}"
 
       - name: Tag main
         run: |
@@ -44,7 +50,13 @@ jobs:
           LATEST_COMMIT_MESSAGE=$(git log -1 --pretty=format:%s)
           git tag -a "v${current_tag}" -m "${LATEST_COMMIT_MESSAGE}"
           git push origin main --tags
+          echo "::set-output name=current_tag::${CURRENT_TAG}"
+          echo "::set-output name=prev_tag::${PREV_TAG}"
 
+  test:
+    if: ${{ needs.tag-main.outputs.current_tag != needs.tag-main.outputs.prev_tag }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Shouldn't run
         run: |
           echo "This step shouldn't run"
