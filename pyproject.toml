@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "test-gh-actions"
-version = "0.1.8"
+version = "0.1.9"
 description = "description test 1"
 authors = ["Shalev Avhar <shalev@getport.io>"]
 readme = "README.md"
