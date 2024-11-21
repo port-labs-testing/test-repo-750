@@ -59,6 +59,8 @@ jobs:
     needs: tag-main
     if: needs.tag-main.outputs.current_tag != needs.tag-main.outputs.prev_tag
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Release
         uses: actions/create-release@v1
