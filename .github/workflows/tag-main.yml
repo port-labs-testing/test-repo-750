@@ -47,6 +47,8 @@ jobs:
             echo "Version has not changed. Skipping tagging."
             exit 0
           fi
+          git config --global user.email "bot@email.com"
+          git config --global user.name "bot"
           LATEST_COMMIT_MESSAGE=$(git log -1 --pretty=format:%s)
           git tag -a "v${current_tag}" -m "${LATEST_COMMIT_MESSAGE}"
           git push origin main --tags
