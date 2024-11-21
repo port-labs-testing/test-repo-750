@@ -57,7 +57,7 @@ jobs:
 
   test:
     needs: tag-main
-    if: needs.tag-main.outputs.current_tag == '0.1.11'
+    if: needs.tag-main.outputs.current_tag == '0.1.12'
     runs-on: ubuntu-latest
     steps:
       - name: Shouldn't run
