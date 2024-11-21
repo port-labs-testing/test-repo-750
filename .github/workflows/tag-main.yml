@@ -52,8 +52,6 @@ jobs:
           LATEST_COMMIT_MESSAGE=$(git log -1 --pretty=format:%s)
           git tag -a "v${current_tag}" -m "${LATEST_COMMIT_MESSAGE}"
           git push origin main --tags
-          echo "::set-output name=current_tag::${CURRENT_TAG}"
-          echo "::set-output name=prev_tag::${PREV_TAG}"
 
   create-release:
     needs: tag-main
