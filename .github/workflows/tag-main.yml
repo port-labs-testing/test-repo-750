@@ -55,11 +55,20 @@ jobs:
           echo "::set-output name=current_tag::${CURRENT_TAG}"
           echo "::set-output name=prev_tag::${PREV_TAG}"
 
-  test:
+  create-release:
     needs: tag-main
     if: needs.tag-main.outputs.current_tag != needs.tag-main.outputs.prev_tag
     runs-on: ubuntu-latest
     steps:
-      - name: Shouldn't run
-        run: |
-          echo "This step shouldn't run"
+      - name: Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ needs.tag-main.outputs.current_tag }}
+          release_name: "Release ${{ needs.tag-main.outputs.current_tag }}"
+          body: |
+            Automated release created for version ${{ needs.tag-main.outputs.current_tag }}.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
