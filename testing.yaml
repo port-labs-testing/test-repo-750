@@ -1039,12 +1039,6 @@ Service:
     Terraform Directory In Repository: "terraform/dir3"
     GitHub Repository: "repo3"
     Service Type: "internal"
-  - Name: "deve"
-    Description: "A valid service entry"
-    AWS Namespace: "aws-namespace-1"
-    Terraform Directory In Repository: "terraform/dir1"
-    GitHub Repository: "repo1"
-    Service Type: "internal"
 
 
 
