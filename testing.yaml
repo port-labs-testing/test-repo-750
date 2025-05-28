@@ -1013,14 +1013,6 @@ Service:
     GitHub Repository: "repo2"
     Service Type: "external"
 
-  - Name: "support"
-    Description: "Would be valid but never processed"
-    AWS Namespace: "aws-namespace-3"
-    Terraform Directory In Repository: "terraform/dir3"
-    GitHub Repository: "repo3"
-    Service Type: "internal"
-
-
 
 
 
