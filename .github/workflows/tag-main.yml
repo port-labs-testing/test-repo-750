@@ -2,7 +2,7 @@ name: Tag main branch
 on:
   push:
     branches:
-      - main
+      # - main
       - feat/test-new-branch-auto-release
     paths:
       - 'pyproject.toml'
