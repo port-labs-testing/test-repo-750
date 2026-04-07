@@ -5,7 +5,7 @@ Service:
     Terraform Directory In Repository: "terraform/dir1"
     GitHub Repository: "repo1"
     Service Type: "internal"
-
+ 
   - Name: "testing!"  # Invalid due to the exclamation mark
     Description: "This will fail due to the Name"
     AWS Namespace: "aws-namespace-2"
